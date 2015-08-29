@@ -8,7 +8,15 @@ import algorithms.search.State;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class SearchableMaze.
+ * 
+ *  * <h1>SearchableMaze</h1>
+ * The Maze Demo Class
+ * <p>
+ * Runs All Searchers For Test
+ *
+ * @author  Guy Liberman
+ * @version 1.0
+ * @since   2015-08-22
  */
 public class SearchableMaze extends CommonSearchable<Position> {
 

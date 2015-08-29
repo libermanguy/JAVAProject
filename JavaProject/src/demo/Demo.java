@@ -6,9 +6,9 @@ import algorithms.search.*;
 // TODO: Auto-generated Javadoc
 /**
  * <h1>Maze Demo</h1>
- * The Maze Demo program
+ * The Maze Demo Class
  * <p>
- * For Test.
+ * Runs All Searchers For Test
  *
  * @author  Guy Liberman
  * @version 1.0
