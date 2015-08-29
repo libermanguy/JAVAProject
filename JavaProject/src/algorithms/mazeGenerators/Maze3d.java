@@ -372,7 +372,6 @@ public class Maze3d
 	}
 	@Override
 	public boolean equals(Object obj) {
-		boolean equal = true;
 		if (_start.equals(((Maze3d)obj).getStartPosition()) && _end.equals(((Maze3d)obj).getGoalPosition()) 
 				&& getXLength() == ((Maze3d)obj).getXLength() && getYLength() == ((Maze3d)obj).getYLength()&& getZLength() == (((Maze3d)obj).getZLength()))
 		{
