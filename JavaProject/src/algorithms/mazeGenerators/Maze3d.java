@@ -1,5 +1,6 @@
 package algorithms.mazeGenerators;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 // TODO: Auto-generated Javadoc
@@ -28,6 +29,19 @@ public class Maze3d
 	public Maze3d( int x_length , int y_length , int z_length ) 
 	{
 		this._maze3d = new int[x_length][y_length][z_length];
+	}
+	
+	
+	public Maze3d(byte[] b) 
+	{
+		this._maze3d = new int[b[6]][b[7]][b[8]];
+		setStartPosition(new Position(b[0],b[1],b[2]));
+		setGoalPosition(new Position(b[3],b[4],b[5]));
+		int current = 9;
+	       for (int i = 0 ; i < getXLength() ; i++)
+	    	   for (int j = 0 ; j < getYLength() ; j++)
+	    		   for (int k = 0 ; k < getZLength() ; k++)
+	    			   _maze3d[i][j][k] = b[current++];
 	}
 	
 	/**
@@ -335,5 +349,44 @@ public class Maze3d
 	public int getZLength()
 	{
 		return this._maze3d[0][0].length;
+	}
+	
+	public byte[] toByteArray()
+	{
+	       ByteArrayOutputStream bos = new ByteArrayOutputStream();
+	       bos.write(_start.getX());
+	       bos.write(_start.getY());
+	       bos.write(_start.getZ());
+	       bos.write(_end.getX());
+	       bos.write(_end.getY());
+	       bos.write(_end.getZ());
+	       bos.write(getXLength());
+	       bos.write(getYLength());
+	       bos.write(getZLength());
+	       for (int i = 0 ; i < getXLength() ; i++)
+	    	   for (int j = 0 ; j < getYLength() ; j++)
+	    		   for (int k = 0 ; k < getZLength() ; k++)
+	    			   bos.write(_maze3d[i][j][k]);
+	        return bos.toByteArray();
+		
+	}
+	@Override
+	public boolean equals(Object obj) {
+		boolean equal = true;
+		if (_start.equals(((Maze3d)obj).getStartPosition()) && _end.equals(((Maze3d)obj).getGoalPosition()) 
+				&& getXLength() == ((Maze3d)obj).getXLength() && getYLength() == ((Maze3d)obj).getYLength()&& getZLength() == (((Maze3d)obj).getZLength()))
+		{
+			for (int i = 0 ; i < getXLength() ; i++)
+		    	   for (int j = 0 ; j < getYLength() ; j++)
+		    		   for (int k = 0 ; k < getZLength() ; k++)
+		    			   if (_maze3d[i][j][k] != ((Maze3d)obj).getStatus(new Position(i,j,k)))
+								return false;
+			
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 }
