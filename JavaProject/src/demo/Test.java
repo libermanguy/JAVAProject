@@ -25,6 +25,7 @@ public class Test {
 		in.close();
 		Maze3d loaded=new Maze3d(b);
 		System.out.println(loaded.equals(maze));
+		
 	}
 
 }
