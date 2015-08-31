@@ -12,8 +12,8 @@ public class Test {
 		MyMaze3dGenerator mg = new MyMaze3dGenerator();
 		Maze3d maze  = mg.generate(3,3,3);	
 		maze.print();
-//		System.out.println(maze.getStartPosition().toString());
-//		System.out.println(maze.getGoalPosition().toString());
+		System.out.println(maze.getStartPosition().toString());
+		System.out.println(maze.getGoalPosition().toString());
 		OutputStream out=new MyCompressorOutputStream(new FileOutputStream("C:\\Java Project\\c1.maz"));
 		out.write(maze.toByteArray());
 		out.flush();
