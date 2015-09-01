@@ -2,10 +2,12 @@ package model;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 public interface Model {
 	public void generate(String name,int x,int y,int z);
-	public String display(String name);
+	public InputStream display(String name);
 	public int[][] getCrossSection(String name,char dim,int index);
 	public void save(String name, String path) throws FileNotFoundException;
 	public void load(String name,String path) throws FileNotFoundException, IOException;

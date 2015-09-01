@@ -1,5 +1,7 @@
 package model;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -7,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import algorithms.mazeGenerators.*;
 import algorithms.search.*;
@@ -43,8 +46,8 @@ public class MyModel implements Model {
 	}
 
 	@Override
-	public String display(String name) {
-		return _mazes.get(name)._newMaze.toString();
+	public InputStream  display(String name) {
+		return new ByteArrayInputStream(_mazes.get(name)._newMaze.toByteArray());
 	}
 
 	@Override
