@@ -1,6 +1,5 @@
 package model;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -9,25 +8,17 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import algorithms.mazeGenerators.*;
+import algorithms.search.*;
+import controller.Controller;
+import io.*;
 
-import algorithms.mazeGenerators.Maze3d;
-import algorithms.mazeGenerators.MyMaze3dGenerator;
-import algorithms.mazeGenerators.Position;
-import algorithms.search.HeuristicAirLine;
-import algorithms.search.HeuristicManhattan;
-import algorithms.search.Searchable;
-import algorithms.search.Searcher;
-import algorithms.search.SearcherAStar;
-import algorithms.search.SearcherBFS;
-import algorithms.search.Solution;
-import algorithms.search.State;
-import io.MyCompressorOutputStream;
-import io.MyDecompressorInputStream;
 
 public class MyModel implements Model {
 
 	HashMap<String,SearchableMaze> _mazes;
 	HashMap<String,Solution<Position>> _solutions;
+	Controller controller;
 	
 	public MyModel() {
 		super();
@@ -38,7 +29,17 @@ public class MyModel implements Model {
 	@Override
 	public void generate(String name, int x, int y, int z) 
 	{
-		_mazes.put(name,new SearchableMaze(new MyMaze3dGenerator().generate(x, y, z)));
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				_mazes.put(name,new SearchableMaze(new MyMaze3dGenerator().generate(x, y, z)));
+				controller.PleaseTellView("your glorious " + name + " is ready sire !");
+			    }
+			  }).start();		
+	}
+
+	public void setController(Controller controller) {
+		this.controller = controller;
 	}
 
 	@Override
@@ -78,9 +79,17 @@ public class MyModel implements Model {
 		try 
 		{
 			in = new MyDecompressorInputStream(new FileInputStream(path));
-			byte[] fileData = new byte[(int) new File(path).length()];
-			in.read(fileData);
+			ArrayList<Integer> buff = new ArrayList<Integer>();
+			int current = in.read();
+			while (current != -1)
+			{
+			 buff.add(current);
+			 current = in.read();
+			}
 			in.close();
+			byte fileData[]=new byte[buff.size()];
+			for ( int i = 0 ; i < buff.size() ; i ++ )
+				fileData[i] = buff.get(i).byteValue();
 			_mazes.put(name, new SearchableMaze(new Maze3d(fileData)));
 		} 
 		catch (Exception e) {
@@ -105,16 +114,24 @@ public class MyModel implements Model {
 
 	@Override
 	public void solve(String name,String alg) {
-		Searcher<Position> searcher = null;
-		switch (alg) {
-    case "bfs": 
-    	searcher = new SearcherBFS<Position>();
-    case "man":  
-    	searcher = new SearcherAStar<Position>(new HeuristicManhattan());
-    case "air":  
-    	searcher = new SearcherAStar<Position>(new HeuristicAirLine());
-	   }
-	_solutions.put(name, searcher.search(_mazes.get(name)));
+		
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				Searcher<Position> searcher = null;
+				switch (alg) {
+		    case "bfs": 
+		    	searcher = new SearcherBFS<Position>();
+		    case "man":  
+		    	searcher = new SearcherAStar<Position>(new HeuristicManhattan());
+		    case "air":  
+		    	searcher = new SearcherAStar<Position>(new HeuristicAirLine());
+			   }
+			_solutions.put(name, searcher.search(_mazes.get(name)));
+				controller.PleaseTellView("sire, i have unraveled your " + name + " punishment !");
+			    }
+			  }).start();		
+
 	}
 
 	@Override
