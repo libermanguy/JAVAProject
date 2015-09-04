@@ -1,4 +1,4 @@
-package algorithms.search;
+package general;
 
 // TODO: Auto-generated Javadoc
 /**

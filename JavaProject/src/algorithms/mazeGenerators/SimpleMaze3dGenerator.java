@@ -2,6 +2,8 @@ package algorithms.mazeGenerators;
 
 import java.util.Random;
 
+import general.Position;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class SimpleMaze3dGenerator.

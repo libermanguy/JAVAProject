@@ -2,6 +2,8 @@ package algorithms.search;
 
 import java.util.ArrayList;
 
+import general.State;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class Solution.
@@ -11,7 +13,7 @@ import java.util.ArrayList;
 public class Solution<T> {
 
 	/** The _steps. */
-	ArrayList<State<T>> _steps;
+	public ArrayList<State<T>> _steps;
 	
 	/**
 	 * Instantiates a new solution.

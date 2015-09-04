@@ -2,6 +2,7 @@ package demo;
 
 import algorithms.mazeGenerators.*;
 import algorithms.search.*;
+import general.Position;
 import model.SearchableMaze;
 
 // TODO: Auto-generated Javadoc

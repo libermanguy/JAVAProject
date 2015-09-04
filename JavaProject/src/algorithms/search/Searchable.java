@@ -2,6 +2,8 @@ package algorithms.search;
 
 import java.util.ArrayList;
 
+import general.State;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Interface Searchable.

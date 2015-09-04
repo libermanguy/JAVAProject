@@ -14,6 +14,7 @@ import java.util.HashMap;
 import algorithms.mazeGenerators.*;
 import algorithms.search.*;
 import controller.Controller;
+import general.Position;
 import io.*;
 
 

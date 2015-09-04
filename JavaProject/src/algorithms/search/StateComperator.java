@@ -1,6 +1,8 @@
 package algorithms.search;
 import java.util.Comparator;
 
+import general.State;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class StateComperator.

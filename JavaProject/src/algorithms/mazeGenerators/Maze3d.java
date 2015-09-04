@@ -3,6 +3,8 @@ package algorithms.mazeGenerators;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
+import general.Position;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class Maze3d.

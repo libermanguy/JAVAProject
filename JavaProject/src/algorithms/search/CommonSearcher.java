@@ -3,6 +3,8 @@ package algorithms.search;
 import java.util.Iterator;
 import java.util.PriorityQueue;
 
+import general.State;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class CommonSearcher.

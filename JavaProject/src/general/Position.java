@@ -1,4 +1,4 @@
-package algorithms.mazeGenerators;
+package general;
 
 public class Position
 {

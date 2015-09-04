@@ -3,9 +3,9 @@ package model;
 import java.util.ArrayList;
 
 import algorithms.mazeGenerators.Maze3d;
-import algorithms.mazeGenerators.Position;
 import algorithms.search.CommonSearchable;
-import algorithms.search.State;
+import general.Position;
+import general.State;
 
 // TODO: Auto-generated Javadoc
 /**

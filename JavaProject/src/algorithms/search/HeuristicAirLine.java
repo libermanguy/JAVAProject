@@ -1,6 +1,7 @@
 package algorithms.search;
 
-import algorithms.mazeGenerators.Position;
+import general.Position;
+import general.State;
 
 // TODO: Auto-generated Javadoc
 /**

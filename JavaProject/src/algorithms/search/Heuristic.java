@@ -1,5 +1,7 @@
 package algorithms.search;
 
+import general.State;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Interface Heuristic.
