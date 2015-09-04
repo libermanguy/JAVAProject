@@ -13,18 +13,40 @@ public class TestModle {
 		Controller controller = new MyController();
 		MyModel model = new MyModel();
 		model.setController(controller);
-		model.generate("Wonderland",10,3,3);
+		model.generate("Wonderland",2,10,10);
 		model.generate("Underworld",13,13,103);
-		
-	/*	System.out.println(model.display("test-1"));
-		System.out.println(model.getCrossSection("test-1", 'x', 1));
-		System.out.println(model.getCrossSection("test-2", 'y', 2));*/
 		try {
 		    Thread.sleep(1000);                
 		} catch(InterruptedException ex) {
 		    Thread.currentThread().interrupt();
 		}
-		System.out.println(model.display("Underworld"));
+		int x = (int)(model.display("Wonderland")[0]);
+		int y = (int)(model.display("Wonderland")[1]);
+		int z = (int)(model.display("Wonderland")[2]);
+		int[][][] maze = (int[][][])(model.display("Wonderland")[3]);
+		for (int i = 0 ; i < x ; i++ )
+			{System.out.println();
+			for (int j = 0 ; j < y ; j++ ){
+				System.out.println();
+				for (int k = 0 ; k < z ; k++ )
+					System.out.print(maze[i][j][k]);}}
+		System.out.println();
+		System.out.println();
+		System.out.println("start pos " + (model.display("Wonderland"))[4]);
+		System.out.println("goal pos  " + (model.display("Wonderland"))[5]);
+		int[][] cross = (int[][])model.getCrossSection("Wonderland", 'x', 1);
+		for (int j = 0 ; j < y ; j++ ){
+			System.out.println();
+			for (int k = 0 ; k < z ; k++ )
+				System.out.print(cross[j][k]);}
+		System.out.println();
+		System.out.println("another test");
+		cross = (int[][]) model.getCrossSection("Wonderland", 'y', 2);
+		for (int j = 0 ; j < x ; j++ ){
+			System.out.println();
+			for (int k = 0 ; k < z ; k++ )
+				System.out.print(cross[j][k]);}
+	/*
 		model.save("Wonderland", "C:\\Java Project\\test-1.maz");
 		model.load("Bathroom", "C:\\Java Project\\test-1.maz");
 	//	System.out.println(model.mazeSize("test-1"));

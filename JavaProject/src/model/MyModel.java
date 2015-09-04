@@ -1,7 +1,5 @@
 package model;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -9,7 +7,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import algorithms.mazeGenerators.*;
 import algorithms.search.*;
@@ -47,17 +44,23 @@ public class MyModel implements Model {
 	}
 
 	@Override
-	public InputStream  display(String name) {
-		return new ByteArrayInputStream(_mazes.get(name)._newMaze.toByteArray());
+	public Object[] display(String name) {
+		Object[] arg = {_mazes.get(name)._newMaze.getXLength(),
+						_mazes.get(name)._newMaze.getYLength(),
+						_mazes.get(name)._newMaze.getZLength(),
+						_mazes.get(name)._newMaze.get_maze3d(),
+						_mazes.get(name)._newMaze.getStartPosition(),
+						_mazes.get(name)._newMaze.getGoalPosition()};
+		return arg;
 	}
 
 	@Override
-	public int[][] getCrossSection(String name, char dim, int index) 
+	public Object getCrossSection(String name, char dim, int index) 
 	{
 		switch (dim) {
-        case 'x':  return _mazes.get(name)._newMaze.getCrossSectionByX(index);
-        case 'y':  return _mazes.get(name)._newMaze.getCrossSectionByY(index);
-        case 'z':  return _mazes.get(name)._newMaze.getCrossSectionByZ(index);
+        case 'x':  return (Object)_mazes.get(name)._newMaze.getCrossSectionByX(index);
+        case 'y':  return (Object)_mazes.get(name)._newMaze.getCrossSectionByY(index);
+        case 'z':  return (Object)_mazes.get(name)._newMaze.getCrossSectionByZ(index);
         default: return null;
 		   }
 	}
@@ -139,8 +142,8 @@ public class MyModel implements Model {
 	}
 
 	@Override
-	public String displaySolution(String name) {
-		return _solutions.get(name).toString();
+	public Object displaySolution(String name) {
+		return (Object)_solutions.get(name);
 	}
 
 	@Override

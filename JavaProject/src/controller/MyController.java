@@ -15,4 +15,8 @@ public void PleaseTellModel(String update) {
 	// TODO Auto-generated method stub
 	
 }
+@Override
+public void AskViewToPresent(Object[] arg) {
+	view.display(arg);
+}
 }
