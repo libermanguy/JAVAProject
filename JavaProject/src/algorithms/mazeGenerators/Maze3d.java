@@ -83,6 +83,11 @@ public class Maze3d
 		return _start;
 	}	
 	
+	public int[][][] get_maze3d() {
+		return _maze3d;
+	}
+
+
 	/**
 	 * Gets the next positions.
 	 *
