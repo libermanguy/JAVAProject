@@ -12,6 +12,7 @@ package view;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -63,8 +64,9 @@ public class CLI extends Thread{
 				}
 				while(!line.equals("exit")){
 					String[] splited = line.split(" ");
-				    List<String> stringList = Arrays.asList(splited);  
+				    ArrayList<String> stringList =new ArrayList<String>(Arrays.asList(splited));  
 					Command cmd=cmdsHM.get(splited[0]);
+					System.out.println(stringList.get(0));
 					if (cmd!=null){
 						stringList.remove(0);
 						splited = stringList.toArray(new String[stringList.size()]);
