@@ -10,7 +10,7 @@ import controller.Command;
 import controller.Controller;
 import general.Position;
 import general.Solution;
-import general.State;;
+import general.State;
 
 public class MyView implements View
 {
