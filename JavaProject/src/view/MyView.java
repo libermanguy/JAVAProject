@@ -18,7 +18,6 @@ public class MyView implements View
 	CLI cli;
 	Controller controller;
 	
-	
 	public void setCLI(HashMap<String,Command> cmdsHM) {
 		cli=new CLI(new BufferedReader(new InputStreamReader(System.in)), 
 				new PrintWriter(new OutputStreamWriter(System.out)), cmdsHM);
