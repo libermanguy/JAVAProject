@@ -7,7 +7,10 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 
 import controller.Command;
-import controller.Controller;;
+import controller.Controller;
+import general.Position;
+import general.Solution;
+import general.State;;
 
 public class MyView implements View
 {
@@ -51,7 +54,7 @@ public class MyView implements View
 	}
 	
 	@Override
-	public void displayCrossSection(int[][] array){
+	public void displayCrossSection(Object[] array){
 		
 	}
 	
@@ -66,7 +69,7 @@ public class MyView implements View
 	}
 	
 	@Override
-	public void displaySolution(String solution){
+	public void displaySolution(Solution<Position> solution){
 		
 	}
 		

@@ -154,7 +154,7 @@ public class dislpaySolutionCommand implements Command
 
 	@Override
 	public void doCommand(String args[]) {
-		view.displaySolution((String) model.displaySolution(args[0]));
+		view.displaySolution(model.displaySolution(args[0]));
 		
 	}
 		
