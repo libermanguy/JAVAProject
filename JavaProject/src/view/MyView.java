@@ -7,12 +7,16 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 
 import controller.Command;
-import controller.Controller;;
+import controller.Controller;
+import general.Position;
+import general.Solution;
+import general.State;;
 
 public class MyView implements View
 {
 	CLI cli;
 	Controller controller;
+	
 	
 	public void setCLI(HashMap<String,Command> cmdsHM) {
 		cli=new CLI(new BufferedReader(new InputStreamReader(System.in)), 
@@ -42,32 +46,38 @@ public class MyView implements View
 	
 	@Override
 	public void display(Object[] arg){
-		
+		System.out.println(arg);
 	}
 
 	@Override
 	public void displayMaze(Object[] obj){
-		
+		System.out.println(obj);
 	}
 	
 	@Override
-	public void displayCrossSection(int[][] array){
-		
+	public void displayCrossSection(Object[] array){
+			for (int[] row: array)
+				System.out.println(java.util.Arrays.toString(row));
+				System.out.println();
 	}
 	
 	@Override
 	public void displayMazeSize(int size){
-		
+		System.out.println("Maze size is : " + size);
 	}
 	
 	@Override
 	public void displayFileSize(int size){
-		
+		System.out.println("File size is : " + size);
 	}
 	
 	@Override
-	public void displaySolution(String solution){
+	public void displaySolution(Solution<Position> solution){
 		
+	}
+	
+	public void startCLI(){
+		cli.start();
 	}
 		
 		

@@ -12,7 +12,9 @@ package view;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 import controller.Command;
 
@@ -60,12 +62,52 @@ public class CLI extends Thread{
 					e.printStackTrace();
 				}
 				while(!line.equals("exit")){
-			        Command cmd=cmdsHM.get(line);
-			        if (cmd != null)
-			        	cmd.doCommand();
-			        else
-			        	out.write("The option does not exist");
+					String[] splited = line.split(" ");
+				    List<String> stringList = Arrays.asList(splited);  
+					Command cmd=cmdsHM.get(splited[0]);
+					if (cmd!=null){
+						stringList.remove(0);
+						splited = stringList.toArray(new String[stringList.size()]);
+						cmd.doCommand(splited);
+					}
+					else {
+						cmd=cmdsHM.get(stringList.get(0) +" "+stringList.get(1));
+						if (cmd!=null){
+							stringList.remove(0);
+							stringList.remove(1);
+							splited = stringList.toArray(new String[stringList.size()]);
+							cmd.doCommand(splited);
+						}
+						else{
+							String tempStr=stringList.get(0) +" "+stringList.get(1)+ " "+ stringList.get(2);
+							cmd=cmdsHM.get(tempStr);
+							if (cmd!=null){
+								stringList.remove(0);
+								stringList.remove(1);
+								stringList.remove(2);
+								if (tempStr.equals("generate 3d maze")){
+									splited = stringList.toArray(new String[stringList.size()]);
+									cmd.doCommand(splited);
+								}
+								else{
+									stringList.remove(3);
+									stringList.remove(6);
+									splited = stringList.toArray(new String[stringList.size()]);
+									cmd.doCommand(splited);
+								}
+							}
+							else{
+								out.write("The command does not exist");
+							}
+						}	
+					
+					}
+			       	
 			      }
+				
+				if (line.equals("exit")){
+					cmdsHM.get("exit").doCommand(null);
+				}
 			    }
 			  }).start();
 
