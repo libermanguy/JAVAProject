@@ -5,12 +5,15 @@ import java.io.IOException;
 import controller.Controller;
 import controller.MyController;
 import model.MyModel;
+import view.MyView;
 
 public class TestModle {
 
 	public static void main(String[] args) throws IOException {
 		
-		Controller controller = new MyController();
+		MyView myview=new MyView();
+		myview.Dir("/users/omripolnikviat");
+		/*Controller controller = new MyController();
 		MyModel model = new MyModel();
 		model.setController(controller);
 		model.generate("Wonderland",2,10,10);
@@ -45,7 +48,9 @@ public class TestModle {
 		for (int j = 0 ; j < x ; j++ ){
 			System.out.println();
 			for (int k = 0 ; k < z ; k++ )
+			
 				System.out.print(cross[j][k]);}
+				*/
 	/*
 		model.save("Wonderland", "C:\\Java Project\\test-1.maz");
 		model.load("Bathroom", "C:\\Java Project\\test-1.maz");
