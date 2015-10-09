@@ -13,6 +13,7 @@ import algorithms.search.*;
 import controller.Controller;
 import general.Position;
 import general.Solution;
+import general.State;
 import io.*;
 
 
@@ -143,8 +144,8 @@ public class MyModel implements Model {
 	}
 
 	@Override
-	public Object displaySolution(String name) {
-		return (Object)_solutions.get(name);
+	public Solution<Position> displaySolution(String name) {
+		return _solutions.get(name);
 	}
 
 	@Override

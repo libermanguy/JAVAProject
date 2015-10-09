@@ -3,6 +3,9 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import general.Position;
+import general.Solution;
+
 public interface Model {
 	public void generate(String name,int x,int y,int z);
 	public Object[] display(String name);
@@ -12,6 +15,6 @@ public interface Model {
 	public int mazeSize(String name);
 	public int fileSize(String name);
 	public void solve(String name,String alg);
-	public Object displaySolution(String name);
+	public Solution<Position> displaySolution(String name);
 	public void exit();
 }
