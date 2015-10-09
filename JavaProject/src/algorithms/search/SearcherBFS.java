@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 
+import general.Solution;
 import general.State;
 
 // TODO: Auto-generated Javadoc

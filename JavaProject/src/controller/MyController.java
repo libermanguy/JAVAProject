@@ -5,8 +5,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 
-import algorithms.search.Solution;
 import general.Position;
+import general.Solution;
 import model.Model;
 import model.SearchableMaze;
 import view.MyView;

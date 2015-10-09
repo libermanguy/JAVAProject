@@ -1,8 +1,6 @@
-package algorithms.search;
+package general;
 
 import java.util.ArrayList;
-
-import general.State;
 
 // TODO: Auto-generated Javadoc
 /**

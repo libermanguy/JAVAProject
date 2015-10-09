@@ -1,5 +1,7 @@
 package algorithms.search;
 
+import general.Solution;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Interface Searcher.

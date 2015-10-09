@@ -12,6 +12,7 @@ import algorithms.mazeGenerators.*;
 import algorithms.search.*;
 import controller.Controller;
 import general.Position;
+import general.Solution;
 import io.*;
 
 
