@@ -8,6 +8,7 @@ import java.util.HashMap;
 
 import controller.Command;
 import controller.Controller;
+import controller.MyController;
 import general.Position;
 import general.Solution;
 import general.State;;
@@ -26,7 +27,7 @@ public class MyView implements View
 	
 	public void setController(Controller c){
 		controller=c;
-		
+		setCLI(controller.getCommands());
 	}
 
 

@@ -18,6 +18,7 @@ HashMap<String,Command> commands;
 
 public MyController() {
 	super();
+	commands = new HashMap<String,Command>();
 	commands.put("dir", new dirCommand());
 	commands.put("generate 3d maze", new generateCommand());
 	commands.put("display", new displayMazeCommand());
@@ -29,9 +30,12 @@ public MyController() {
 	commands.put("solve", new solveCommand());
 	commands.put("display solution", new dislpaySolutionCommand());
 	commands.put("exit", new exitCommand());
-	view.setCLI(commands);
 }
 
+public HashMap<String, Command> getCommands()
+{
+return commands;
+}
 
 @Override
 public void PleaseTellView(String update) {

@@ -82,7 +82,7 @@ public class CLI extends Thread{
 							String tempStr=stringList.get(0) +" "+stringList.get(1)+ " "+ stringList.get(2);
 							cmd=cmdsHM.get(tempStr);
 							if (cmd!=null){
-								stringList.remove(0);
+
 								stringList.remove(1);
 								stringList.remove(2);
 								if (tempStr.equals("generate 3d maze")){
