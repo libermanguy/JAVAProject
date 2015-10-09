@@ -104,7 +104,13 @@ public class CLI extends Thread{
 						}	
 					
 					}
-			       	
+					try {
+						line = in.readLine();
+					} 
+					catch (IOException e) {
+						
+						e.printStackTrace();
+					}
 			      }
 				
 				if (line.equals("exit")){
