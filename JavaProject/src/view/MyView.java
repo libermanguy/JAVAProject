@@ -26,7 +26,6 @@ public class MyView implements View
 	
 	public void setController(Controller c){
 		controller=c;
-		setCLI(controller.getCommands());
 	}
 
 

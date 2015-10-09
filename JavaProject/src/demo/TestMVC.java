@@ -9,9 +9,7 @@ public class TestMVC {
 	public static void main(String[] args) {
 		MyView myview=new MyView();
 		MyModel mymodel=new MyModel();
-		MyController mycontroller = new MyController();
-		mymodel.setController(mycontroller);
-		myview.setController(mycontroller);
+		MyController mycontroller = new MyController(myview,mymodel);
 		myview.startCLI();
 	}
 
