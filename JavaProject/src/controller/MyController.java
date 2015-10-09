@@ -8,16 +8,22 @@ import java.util.HashMap;
 import general.Position;
 import general.Solution;
 import model.Model;
+import model.MyModel;
 import model.SearchableMaze;
 import view.MyView;
+import view.View;
 
 public class MyController implements Controller{
 Model model;
-MyView view;
+View view;
 HashMap<String,Command> commands;
 
-public MyController() {
+public MyController(MyView view, MyModel model) {
 	super();
+	this.model=model;
+	this.view=view;
+	model.setController(this);
+	view.setController(this);
 	commands = new HashMap<String,Command>();
 	commands.put("dir", new dirCommand());
 	commands.put("generate 3d maze", new generateCommand());
@@ -30,6 +36,7 @@ public MyController() {
 	commands.put("solve", new solveCommand());
 	commands.put("display solution", new dislpaySolutionCommand());
 	commands.put("exit", new exitCommand());
+	view.setCLI(commands);
 }
 
 public HashMap<String, Command> getCommands()
