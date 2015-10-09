@@ -11,7 +11,7 @@ import controller.Controller;
 import controller.MyController;
 import general.Position;
 import general.Solution;
-import general.State;;
+import general.State;
 
 public class MyView implements View
 {
