@@ -1,5 +1,8 @@
 package controller;
 
+import java.awt.Dialog.ModalExclusionType;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashMap;
 
 import algorithms.search.Solution;
@@ -26,6 +29,7 @@ public MyController() {
 	commands.put("solve", new solveCommand());
 	commands.put("display solution", new dislpaySolutionCommand());
 	commands.put("exit", new exitCommand());
+	view.setCLI(commands);
 }
 
 
@@ -48,8 +52,7 @@ public class dirCommand implements Command
 
 	@Override
 	public void doCommand(String args[]) {
-		// TODO Auto-generated method stub
-		
+		view.Dir(args[0]);		
 	}
 		
 }
@@ -59,8 +62,7 @@ public class generateCommand implements Command
 
 	@Override
 	public void doCommand(String args[]) {
-		// TODO Auto-generated method stub
-		
+		model.generate(args[0], Integer.parseInt(args[1]), Integer.parseInt(args[2]), Integer.parseInt(args[3]));
 	}
 		
 }
@@ -70,8 +72,7 @@ public class displayMazeCommand implements Command
 
 	@Override
 	public void doCommand(String args[]) {
-		// TODO Auto-generated method stub
-		
+		view.displayMaze(model.display(args[0]));		
 	}
 		
 }
@@ -81,7 +82,7 @@ public class displayCrossCommand implements Command
 
 	@Override
 	public void doCommand(String args[]) {
-		// TODO Auto-generated method stub
+		view.displayCrossSection((int[][]) model.getCrossSection(args[2], args[0].charAt(0), Integer.parseInt(args[1])));
 		
 	}
 		
@@ -92,8 +93,12 @@ public class saveCommand implements Command
 
 	@Override
 	public void doCommand(String args[]) {
-		// TODO Auto-generated method stub
-		
+		try {
+			model.save(args[0], args[1]);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
 	}
 		
 }
@@ -103,8 +108,12 @@ public class loadCommand implements Command
 
 	@Override
 	public void doCommand(String args[]) {
-		// TODO Auto-generated method stub
-		
+		try {
+			model.load(args[1], args[0]);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 		
 }
@@ -114,8 +123,7 @@ public class mazeSizeCommand implements Command
 
 	@Override
 	public void doCommand(String args[]) {
-		// TODO Auto-generated method stub
-		
+		view.displayMazeSize(model.mazeSize(args[0]));
 	}
 		
 }
@@ -125,7 +133,7 @@ public class fileSizeCommand implements Command
 
 	@Override
 	public void doCommand(String args[]) {
-		// TODO Auto-generated method stub
+		view.displayFileSize(model.fileSize(args[0]));
 		
 	}
 		
@@ -136,8 +144,7 @@ public class solveCommand implements Command
 
 	@Override
 	public void doCommand(String args[]) {
-		// TODO Auto-generated method stub
-		
+		model.solve(args[0], args[1]);
 	}
 		
 }
@@ -147,7 +154,7 @@ public class dislpaySolutionCommand implements Command
 
 	@Override
 	public void doCommand(String args[]) {
-		// TODO Auto-generated method stub
+		view.displaySolution((String) model.displaySolution(args[0]));
 		
 	}
 		
