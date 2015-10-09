@@ -56,7 +56,7 @@ public class MyView implements View
 	
 	@Override
 	public void displayCrossSection(Object[] array){
-			for (int[] row: array)
+			for (int[] row: (int[][])array)
 				System.out.println(java.util.Arrays.toString(row));
 				System.out.println();
 	}
