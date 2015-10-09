@@ -66,7 +66,6 @@ public class CLI extends Thread{
 					String[] splited = line.split(" ");
 				    ArrayList<String> stringList =new ArrayList<String>(Arrays.asList(splited));  
 					Command cmd=cmdsHM.get(splited[0]);
-					System.out.println(stringList.get(0));
 					if (cmd!=null){
 						stringList.remove(0);
 						splited = stringList.toArray(new String[stringList.size()]);
@@ -76,7 +75,7 @@ public class CLI extends Thread{
 						cmd=cmdsHM.get(stringList.get(0) +" "+stringList.get(1));
 						if (cmd!=null){
 							stringList.remove(0);
-							stringList.remove(1);
+							stringList.remove(0);
 							splited = stringList.toArray(new String[stringList.size()]);
 							cmd.doCommand(splited);
 						}
@@ -84,16 +83,16 @@ public class CLI extends Thread{
 							String tempStr=stringList.get(0) +" "+stringList.get(1)+ " "+ stringList.get(2);
 							cmd=cmdsHM.get(tempStr);
 							if (cmd!=null){
-
-								stringList.remove(1);
-								stringList.remove(2);
+								stringList.remove(0);
+								stringList.remove(0);
+								stringList.remove(0);
 								if (tempStr.equals("generate 3d maze")){
 									splited = stringList.toArray(new String[stringList.size()]);
 									cmd.doCommand(splited);
 								}
 								else{
-									stringList.remove(3);
-									stringList.remove(6);
+									stringList.remove(0);
+									stringList.remove(2);
 									splited = stringList.toArray(new String[stringList.size()]);
 									cmd.doCommand(splited);
 								}
