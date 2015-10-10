@@ -50,7 +50,18 @@ public class MyView implements View
 
 	@Override
 	public void displayMaze(Object[] obj){
-		System.out.println(obj);
+		System.out.println("Maze dimensions { X = " + obj[0] + " , Y = " + obj[1] + " , Z = " + obj[2] + " }");
+		Position p = (Position)obj[4];
+		System.out.println("Maze start position : " + p.toString());
+		p = (Position)obj[5];
+		System.out.println("Maze end position : " + p.toString());
+		for (int[][] dimension: (int[][][])obj[3])
+		{
+			for (int[] row: dimension)
+				System.out.println(java.util.Arrays.toString(row));
+				System.out.println();
+		}
+
 	}
 	
 	@Override
@@ -72,7 +83,7 @@ public class MyView implements View
 	
 	@Override
 	public void displaySolution(Solution<Position> solution){
-		
+		System.out.println(solution.toString());
 	}
 	
 	public void startCLI(){
