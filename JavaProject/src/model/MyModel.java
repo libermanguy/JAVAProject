@@ -1,5 +1,6 @@
  package model;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -57,7 +58,7 @@ public class MyModel implements Model {
 	}
 
 	@Override
-	public Object getCrossSection(String name, char dim, int index) 
+	public Object getCrossSection(String name, char dim, int index) throws ArrayIndexOutOfBoundsException
 	{
 		switch (dim) {
         case 'x':  return (Object)_mazes.get(name)._newMaze.getCrossSectionByX(index);
@@ -117,8 +118,8 @@ public class MyModel implements Model {
 
 	@Override
 	public int fileSize(String name) {
-		// TODO Auto-generated method stub
-		return 0;
+		File f = new File(name);
+		return (int) f.length();
 	}
 
 	@Override
