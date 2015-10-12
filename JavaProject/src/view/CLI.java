@@ -66,7 +66,7 @@ public class CLI extends Thread{
 					String[] splited = line.split(" ");
 				    ArrayList<String> stringList =new ArrayList<String>(Arrays.asList(splited));  
 					Command cmd=cmdsHM.get(splited[0]);
-					if (cmd!=null){
+					if (cmd!=null && !(splited[1].equals("cross") || splited[1].equals("solution"))){
 						stringList.remove(0);
 						splited = stringList.toArray(new String[stringList.size()]);
 						cmd.doCommand(splited);
