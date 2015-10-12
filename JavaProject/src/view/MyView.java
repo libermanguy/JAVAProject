@@ -48,6 +48,10 @@ public class MyView implements View
 		System.out.println(arg);
 	}
 
+	public void displayStr(String arg){
+		System.out.println(arg);
+	}
+	
 	@Override
 	public void displayMaze(Object[] obj){
 		System.out.println("Maze dimensions { X = " + obj[0] + " , Y = " + obj[1] + " , Z = " + obj[2] + " }");

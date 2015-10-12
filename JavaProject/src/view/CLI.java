@@ -73,7 +73,7 @@ public class CLI extends Thread{
 				    ArrayList<String> stringList =new ArrayList<String>(Arrays.asList(splited));
 				    int size=stringList.size();
 				    Command cmd=null;
-				    if (size>0){
+				    if (size > 1){
 				    	cmd=cmdsHM.get(splited[0]);
 				    }
 					if (cmd!=null && !(splited[1].equals("cross") || splited[1].equals("solution"))){
@@ -112,14 +112,12 @@ public class CLI extends Thread{
 									cmd.doCommand(splited);
 								}
 								else{
-									stringList.remove(0);
-									stringList.remove(2);
 									splited = stringList.toArray(new String[stringList.size()]);
 									cmd.doCommand(splited);
 								}
 							}
 							else{
-								out.write("The command does not exist, write 'Help' or '?'");
+								out.write("Wrong command, write 'Help' or '?'");
 								out.flush();
 								getInput();
 							}
@@ -159,7 +157,7 @@ public class CLI extends Thread{
 				+"load maze <file name> <name>\n"
 				+"maze size <name>\n"
 				+"file size <name>\n"
-				+"solve <name> <algorithm>\n"
+				+"solve <name> <man\\bfs\\air>\n"
 				+"display solution <name>\n"
 				+"exit\n"
 				);

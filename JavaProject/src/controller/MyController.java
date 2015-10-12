@@ -46,7 +46,7 @@ return commands;
 
 @Override
 public void PleaseTellView(String update) {
-	System.out.println(update);
+	view.displayStr(update);
 }
 @Override
 public void PleaseTellModel(String update) {
@@ -63,7 +63,10 @@ public class dirCommand implements Command
 
 	@Override
 	public void doCommand(String args[]) {
-		view.Dir(args[0]);		
+		if (args.length == 1)
+		view.Dir(args[0]);	
+		else
+			view.displayStr("Wrong number of parameters");
 	}
 		
 }
@@ -73,7 +76,17 @@ public class generateCommand implements Command
 
 	@Override
 	public void doCommand(String args[]) {
+		if (args.length == 4)
+		try
+		{
 		model.generate(args[0], Integer.parseInt(args[1]), Integer.parseInt(args[2]), Integer.parseInt(args[3]));
+		}
+		catch (Exception e)
+		{
+			view.displayStr("Error while generating the maze !");
+		}
+		else
+			view.displayStr("Wrong number of parameters");
 	}
 		
 }
@@ -83,7 +96,19 @@ public class displayMazeCommand implements Command
 
 	@Override
 	public void doCommand(String args[]) {
-		view.displayMaze(model.display(args[0]));		
+		if (args.length == 1)
+		{
+			try
+			{
+			view.displayMaze(model.display(args[0]));		
+			}
+			catch (Exception e)
+			{
+				view.displayStr("Error while displaying the maze !");
+			}
+		}
+		else
+			view.displayStr("Wrong number of parameters");
 	}
 		
 }
@@ -93,7 +118,19 @@ public class displayCrossCommand implements Command
 
 	@Override
 	public void doCommand(String args[]) {
-		view.displayCrossSection((int[][]) model.getCrossSection(args[2], args[0].charAt(0), Integer.parseInt(args[1])));
+		if (args.length == 5)
+		{
+			try
+			{
+			view.displayCrossSection((int[][]) model.getCrossSection(args[4], args[1].charAt(0), Integer.parseInt(args[2])));
+			}
+			catch (Exception e)
+			{
+				view.displayStr("Error while displaying the cross section !");
+			}
+		}
+		else 
+			view.displayStr("Wrong Number of parameters");
 		
 	}
 		
@@ -104,12 +141,16 @@ public class saveCommand implements Command
 
 	@Override
 	public void doCommand(String args[]) {
-		try {
+		if (args.length == 2)
+		{
+			try {
 			model.save(args[0], args[1]);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}		
+		} catch (Exception e) {
+			view.displayStr("Can not save to file !");
+		}	
+		}
+		else 
+			view.displayStr("Wrong Number of parameters");
 	}
 		
 }
@@ -119,12 +160,16 @@ public class loadCommand implements Command
 
 	@Override
 	public void doCommand(String args[]) {
+		if (args.length == 2)
+		{
 		try {
 			model.load(args[1], args[0]);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (Exception e) {
+			view.displayStr("Can not load the file !");
 		}
+		}
+		else 
+			view.displayStr("Wrong Number of parameters");
 	}
 		
 }
@@ -134,9 +179,21 @@ public class mazeSizeCommand implements Command
 
 	@Override
 	public void doCommand(String args[]) {
+		if (args.length == 1)
+		{
+		try
+		{
 		view.displayMazeSize(model.mazeSize(args[0]));
-	}
+		}
+		catch (Exception e)
+		{
+			view.displayStr("Error displaying maze size !");
+		}
+		}
 		
+		else
+			view.displayStr("Wrong number of parameters");
+	}	
 }
 
 public class fileSizeCommand implements Command
@@ -144,18 +201,41 @@ public class fileSizeCommand implements Command
 
 	@Override
 	public void doCommand(String args[]) {
-		view.displayFileSize(model.fileSize(args[0]));
-		
+		if (args.length==1)	
+		{
+			try
+			{
+			view.displayFileSize(model.fileSize(args[0]));
+			}
+			catch (Exception e)
+			{
+				view.displayStr("Error displaying saved file size !");
+			}
+		}
+		else
+			view.displayStr("Wrong number of parameters");
 	}
 		
 }
 
 public class solveCommand implements Command
 {
-
+	
 	@Override
 	public void doCommand(String args[]) {
-		model.solve(args[0], args[1]);
+	if (args.length == 2) 
+		{
+			try
+			{
+				model.solve(args[0], args[1]);
+			}
+			catch (Exception e)
+			{
+				view.displayStr("Failure while solving the maze");
+			}
+		}
+	else
+		view.displayStr("Wrong number of parameters");
 	}
 		
 }
@@ -165,7 +245,19 @@ public class dislpaySolutionCommand implements Command
 
 	@Override
 	public void doCommand(String args[]) {
-		view.displaySolution(model.displaySolution(args[0]));
+		if (args.length == 1)
+		{
+			try
+			{
+				view.displaySolution(model.displaySolution(args[0]));
+			}
+			catch (Exception e)
+			{
+				view.displayStr("Failure while displaying solution");
+			}
+		}
+		else
+			view.displayStr("Wrong number of parameters");
 		
 	}
 		

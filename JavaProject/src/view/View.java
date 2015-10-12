@@ -12,6 +12,6 @@ public interface View {
 	public void displayMazeSize(int size);
 	public void displayFileSize(int size);
 	public void displaySolution(Solution<Position> solution);
-	
+	public void displayStr(String arg);
 	
 }

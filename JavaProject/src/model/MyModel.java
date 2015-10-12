@@ -69,25 +69,18 @@ public class MyModel implements Model {
 	}
 
 	@Override
-	public void save(String name, String path) throws FileNotFoundException 
+	public void save(String name, String path) throws Exception 
 	{
 		OutputStream out=new MyCompressorOutputStream(new FileOutputStream(path));
-		try {
 			out.write(_mazes.get(name)._newMaze.toByteArray());
 			out.flush();
 			out.close();	
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}	
-
+			controller.PleaseTellView("Maze saved successfully");
 	}
 
 	@Override
-	public void load(String name, String path) throws IOException {
+	public void load(String name, String path) throws Exception {
 		InputStream in;
-		try 
-		{
 			in = new MyDecompressorInputStream(new FileInputStream(path));
 			ArrayList<Integer> buff = new ArrayList<Integer>();
 			int current = in.read();
@@ -101,12 +94,8 @@ public class MyModel implements Model {
 			for ( int i = 0 ; i < buff.size() ; i ++ )
 				fileData[i] = buff.get(i).byteValue();
 			_mazes.put(name, new SearchableMaze(new Maze3d(fileData)));
-		} 
-		catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+			controller.PleaseTellView("Maze loaded successfully");
+	
 
 	}
 
@@ -137,10 +126,16 @@ public class MyModel implements Model {
 		    case "air":  
 		    	searcher = new SearcherAStar<Position>(new HeuristicAirLine());
 			   }
+				try
+				{
 			_solutions.put(name, searcher.search(_mazes.get(name)));
-				controller.PleaseTellView("sire, i have unraveled your " + name + " punishment !");
+			controller.PleaseTellView("sire, i have unraveled your " + name + " punishment !");
+				}
+				catch (Exception e)
+				{
+					controller.PleaseTellView("Failed solving " + name + " punishment, probably not ready yet or doesn`t exist!");
 			    }
-			  }).start();		
+			  }}).start();		
 
 	}
 

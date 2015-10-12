@@ -10,8 +10,8 @@ public interface Model {
 	public void generate(String name,int x,int y,int z);
 	public Object[] display(String name);
 	public Object getCrossSection(String name,char dim,int index);
-	public void save(String name, String path) throws FileNotFoundException;
-	public void load(String name,String path) throws FileNotFoundException, IOException;
+	public void save(String name, String path) throws Exception;
+	public void load(String name,String path) throws Exception;
 	public int mazeSize(String name);
 	public int fileSize(String name);
 	public void solve(String name,String alg);
