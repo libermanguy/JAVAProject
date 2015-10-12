@@ -33,6 +33,7 @@ public class CLI extends Thread{
 	/** String to Commands HashMap. */
 	HashMap<String,Command> cmdsHM;
 
+	String line=null;
 	
 	/**
 	 * Instantiates a new cli.
@@ -54,25 +55,39 @@ public class CLI extends Thread{
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				String line=null;
-				try {
-					line = in.readLine();
-				} 
-				catch (IOException e) {
-					
-					e.printStackTrace();
-				}
+				
+				getInput();
 				while(!line.equals("exit")){
+					if (line.equals("")){
+						out.write("");
+						getInput();
+					}
+					else if (line.equals("?") || line.toLowerCase().equals("help")){
+						PrintHelp();
+						getInput();
+						
+					}
+					else
+					{
 					String[] splited = line.split(" ");
-				    ArrayList<String> stringList =new ArrayList<String>(Arrays.asList(splited));  
-					Command cmd=cmdsHM.get(splited[0]);
+				    ArrayList<String> stringList =new ArrayList<String>(Arrays.asList(splited));
+				    int size=stringList.size();
+				    Command cmd=null;
+				    if (size>0){
+				    	cmd=cmdsHM.get(splited[0]);
+				    }
 					if (cmd!=null && !(splited[1].equals("cross") || splited[1].equals("solution"))){
 						stringList.remove(0);
 						splited = stringList.toArray(new String[stringList.size()]);
 						cmd.doCommand(splited);
 					}
 					else {
-						cmd=cmdsHM.get(stringList.get(0) +" "+stringList.get(1));
+						 if (size>1){
+								cmd=cmdsHM.get(stringList.get(0) +" "+stringList.get(1));
+						    }
+						 else{
+							 cmd=null;
+						 }
 						if (cmd!=null){
 							stringList.remove(0);
 							stringList.remove(0);
@@ -80,8 +95,14 @@ public class CLI extends Thread{
 							cmd.doCommand(splited);
 						}
 						else{
-							String tempStr=stringList.get(0) +" "+stringList.get(1)+ " "+ stringList.get(2);
-							cmd=cmdsHM.get(tempStr);
+							String tempStr=null;
+							 if (size>2){
+								tempStr=stringList.get(0) +" "+stringList.get(1)+ " "+ stringList.get(2);
+								cmd=cmdsHM.get(tempStr);
+							    }
+							 else{
+								 cmd=null;
+							 }
 							if (cmd!=null){
 								stringList.remove(0);
 								stringList.remove(0);
@@ -98,22 +119,19 @@ public class CLI extends Thread{
 								}
 							}
 							else{
-								out.write("The command does not exist");
+								out.write("The command does not exist, write 'Help' or '?'");
+								out.flush();
+								getInput();
 							}
 						}	
 					
 					}
-					try {
-						line = in.readLine();
-					} 
-					catch (IOException e) {
-						
-						e.printStackTrace();
-					}
+					getInput();
 			      }
 				
 				if (line.equals("exit")){
 					cmdsHM.get("exit").doCommand(null);
+				}
 				}
 			    }
 			  }).start();
@@ -121,5 +139,31 @@ public class CLI extends Thread{
 
 			
 		}
+	
+	public void getInput(){
+		try {
+			line = in.readLine();
+		} 
+		catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+	}
+	public void PrintHelp(){
+		out.write("Issue on of the following commands:\n");
+		out.write("dir <path>\n"
+				+ "generate 3d maze <name> <other params>\n"
+				+ "display <name>\n"
+				+ "display cross section by {X,Y,Z} <index> for <name>\n"
+				+ "save maze <name> <file name>\n"
+				+"load maze <file name> <name>\n"
+				+"maze size <name>\n"
+				+"file size <name>\n"
+				+"solve <name> <algorithm>\n"
+				+"display solution <name>\n"
+				+"exit\n"
+				);
+		out.flush();
+	}
 	
 }
