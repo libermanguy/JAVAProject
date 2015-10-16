@@ -13,11 +13,27 @@ import model.SearchableMaze;
 import view.MyView;
 import view.View;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MyController.
+ */
 public class MyController implements Controller{
+
+/** The model. */
 Model model;
+
+/** The view. */
 View view;
+
+/** The commands. */
 HashMap<String,Command> commands;
 
+/**
+ * Instantiates a new my controller.
+ *
+ * @param view the view
+ * @param model the model
+ */
 public MyController(MyView view, MyModel model) {
 	super();
 	this.model=model;
@@ -39,28 +55,48 @@ public MyController(MyView view, MyModel model) {
 	view.setCLI(commands);
 }
 
+/* (non-Javadoc)
+ * @see controller.Controller#getCommands()
+ */
 public HashMap<String, Command> getCommands()
 {
 return commands;
 }
 
+/* (non-Javadoc)
+ * @see controller.Controller#PleaseTellView(java.lang.String)
+ */
 @Override
 public void PleaseTellView(String update) {
 	view.displayStr(update);
 }
+
+/* (non-Javadoc)
+ * @see controller.Controller#PleaseTellModel(java.lang.String)
+ */
 @Override
 public void PleaseTellModel(String update) {
 	// TODO Auto-generated method stub
 	
 }
+
+/* (non-Javadoc)
+ * @see controller.Controller#AskViewToPresent(java.lang.Object[])
+ */
 @Override
 public void AskViewToPresent(Object[] arg) {
 	view.display(arg);
 }
 
+/**
+ * The Class dirCommand.
+ */
 public class dirCommand implements Command
 {
 
+	/* (non-Javadoc)
+	 * @see controller.Command#doCommand(java.lang.String[])
+	 */
 	@Override
 	public void doCommand(String args[]) {
 		if (args.length == 1)
@@ -71,9 +107,15 @@ public class dirCommand implements Command
 		
 }
 
+/**
+ * The Class generateCommand.
+ */
 public class generateCommand implements Command
 {
 
+	/* (non-Javadoc)
+	 * @see controller.Command#doCommand(java.lang.String[])
+	 */
 	@Override
 	public void doCommand(String args[]) {
 		if (args.length == 4)
@@ -91,9 +133,15 @@ public class generateCommand implements Command
 		
 }
 
+/**
+ * The Class displayMazeCommand.
+ */
 public class displayMazeCommand implements Command
 {
 
+	/* (non-Javadoc)
+	 * @see controller.Command#doCommand(java.lang.String[])
+	 */
 	@Override
 	public void doCommand(String args[]) {
 		if (args.length == 1)
@@ -113,9 +161,15 @@ public class displayMazeCommand implements Command
 		
 }
 
+/**
+ * The Class displayCrossCommand.
+ */
 public class displayCrossCommand implements Command
 {
 
+	/* (non-Javadoc)
+	 * @see controller.Command#doCommand(java.lang.String[])
+	 */
 	@Override
 	public void doCommand(String args[]) {
 		if (args.length == 5)
@@ -136,9 +190,15 @@ public class displayCrossCommand implements Command
 		
 }
 
+/**
+ * The Class saveCommand.
+ */
 public class saveCommand implements Command
 {
 
+	/* (non-Javadoc)
+	 * @see controller.Command#doCommand(java.lang.String[])
+	 */
 	@Override
 	public void doCommand(String args[]) {
 		if (args.length == 2)
@@ -155,9 +215,15 @@ public class saveCommand implements Command
 		
 }
 
+/**
+ * The Class loadCommand.
+ */
 public class loadCommand implements Command
 {
 
+	/* (non-Javadoc)
+	 * @see controller.Command#doCommand(java.lang.String[])
+	 */
 	@Override
 	public void doCommand(String args[]) {
 		if (args.length == 2)
@@ -174,9 +240,15 @@ public class loadCommand implements Command
 		
 }
 
+/**
+ * The Class mazeSizeCommand.
+ */
 public class mazeSizeCommand implements Command
 {
 
+	/* (non-Javadoc)
+	 * @see controller.Command#doCommand(java.lang.String[])
+	 */
 	@Override
 	public void doCommand(String args[]) {
 		if (args.length == 1)
@@ -196,9 +268,15 @@ public class mazeSizeCommand implements Command
 	}	
 }
 
+/**
+ * The Class fileSizeCommand.
+ */
 public class fileSizeCommand implements Command
 {
 
+	/* (non-Javadoc)
+	 * @see controller.Command#doCommand(java.lang.String[])
+	 */
 	@Override
 	public void doCommand(String args[]) {
 		if (args.length==1)	
@@ -218,9 +296,15 @@ public class fileSizeCommand implements Command
 		
 }
 
+/**
+ * The Class solveCommand.
+ */
 public class solveCommand implements Command
 {
 	
+	/* (non-Javadoc)
+	 * @see controller.Command#doCommand(java.lang.String[])
+	 */
 	@Override
 	public void doCommand(String args[]) {
 	if (args.length == 2) 
@@ -240,9 +324,15 @@ public class solveCommand implements Command
 		
 }
 
+/**
+ * The Class dislpaySolutionCommand.
+ */
 public class dislpaySolutionCommand implements Command
 {
 
+	/* (non-Javadoc)
+	 * @see controller.Command#doCommand(java.lang.String[])
+	 */
 	@Override
 	public void doCommand(String args[]) {
 		if (args.length == 1)
@@ -263,9 +353,15 @@ public class dislpaySolutionCommand implements Command
 		
 }
 
+/**
+ * The Class exitCommand.
+ */
 public class exitCommand implements Command
 {
 
+	/* (non-Javadoc)
+	 * @see controller.Command#doCommand(java.lang.String[])
+	 */
 	@Override
 	public void doCommand(String args[]) {
 		model.exit();

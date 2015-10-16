@@ -34,6 +34,11 @@ public class Maze3d
 	}
 	
 	
+	/**
+	 * Instantiates a new maze3d.
+	 *
+	 * @param b the b
+	 */
 	public Maze3d(byte[] b) 
 	{
 		this._maze3d = new int[b[6]][b[7]][b[8]];
@@ -83,6 +88,11 @@ public class Maze3d
 		return _start;
 	}	
 	
+	/**
+	 * Gets the _maze3d.
+	 *
+	 * @return the _maze3d
+	 */
 	public int[][][] get_maze3d() {
 		return _maze3d;
 	}
@@ -358,6 +368,11 @@ public class Maze3d
 		return this._maze3d[0][0].length;
 	}
 	
+	/**
+	 * To byte array.
+	 *
+	 * @return the byte[]
+	 */
 	public byte[] toByteArray()
 	{
 	       ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -377,6 +392,10 @@ public class Maze3d
 	        return bos.toByteArray();
 		
 	}
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (_start.equals(((Maze3d)obj).getStartPosition()) && _end.equals(((Maze3d)obj).getGoalPosition()) 

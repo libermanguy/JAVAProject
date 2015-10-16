@@ -19,6 +19,7 @@ import java.util.List;
 
 import controller.Command;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class CLI.
  */
@@ -33,6 +34,7 @@ public class CLI extends Thread{
 	/** String to Commands HashMap. */
 	HashMap<String,Command> cmdsHM;
 
+	/** The line. */
 	String line=null;
 	
 	/**
@@ -139,6 +141,11 @@ public class CLI extends Thread{
 			
 		}
 	
+	/**
+	 * Gets the input.
+	 *
+	 * @return the input
+	 */
 	public void getInput(){
 		try {
 			line = in.readLine();
@@ -148,6 +155,10 @@ public class CLI extends Thread{
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Prints the help.
+	 */
 	public void PrintHelp(){
 		out.write("Issue on of the following commands:\n");
 		out.write("dir <path>\n"

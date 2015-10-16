@@ -1,9 +1,8 @@
 package demo;
 
-import algorithms.mazeGenerators.*;
-import algorithms.search.*;
-import general.Position;
-import model.SearchableMaze;
+import controller.MyController;
+import model.MyModel;
+import view.MyView;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -12,51 +11,32 @@ import model.SearchableMaze;
  * <p>
  * Runs All Searchers For Test
  *
- * @author  Guy Liberman
+ * @author  Guy Liberman & Omri Polinikviat
  * @version 1.0
- * @since   2015-08-22
+ * @since   2015-10-16
  */
 public class Demo {
-
-	/**
-	 * Run.
-	 */
-	public static void run()
-	{
-		MyMaze3dGenerator mg = new MyMaze3dGenerator();
-		Maze3d newmaze  = mg.generate(10,10,10);	
-		newmaze.print();
-		
-		SearchableMaze searchable = new SearchableMaze(newmaze);
-		Searcher<Position> searcher = new SearcherBFS<Position>();
-		
-		System.out.println("Start:              " + newmaze.getStartPosition());
-		System.out.println("End:                " + newmaze.getGoalPosition());
-		System.out.println(searcher.search(searchable));
-		int n = searcher.getNumberOfNodesEvaluated();
-		System.out.println("BFS Took:           " + n + " nodes to evaluate");
-		
-		searcher = new SearcherAStar<Position>(new HeuristicManhattan());
-		System.out.println(searcher.search(searchable));
-		
-		n = searcher.getNumberOfNodesEvaluated();
-		System.out.println("A* Manhattan Took : " + n + " nodes to evaluate");
-		
-		searcher = new SearcherAStar<Position>(new HeuristicAirLine());
-		System.out.println(searcher.search(searchable));
-		n = searcher.getNumberOfNodesEvaluated();
-		System.out.println("A* AirLine Took :   " + n + " nodes to evaluate");
-	}
-	
-	
-	
-	/**
-	 * The main method.
-	 *
-	 * @param args the arguments
-	 */
 	public static void main(String[] args) {
-		run();
+		MyView myview=new MyView();
+		MyModel mymodel=new MyModel();
+		MyController mycontroller = new MyController(myview,mymodel);
+		myview.startCLI();
 	}
 
 }
+
+/*
+***********test commands******************
+dir c:\temp
+generate 3d maze testmaze 10 10 10
+save maze testmaze c:\temp\tm.maz
+load maze c:\temp\tm.maz testmaze2
+display cross section by x 3 for testmaze
+maze size testmaze
+maze size testmaze2
+file size c:\temp\tm.maz
+solve testmaze man
+solve testmaze2 air
+display solution testmaze
+display testmaze
+*/

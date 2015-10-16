@@ -18,14 +18,30 @@ import general.State;
 import io.*;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MyModel.
+ */
 public class MyModel implements Model {
 
+	/** The _mazes. */
 	HashMap<String,SearchableMaze> _mazes;
+	
+	/** The _solutions. */
 	HashMap<String,Solution<Position>> _solutions;
+	
+	/** The controller. */
 	Controller controller;
+	
+	/** The openfiles. */
 	int openfiles;
+	
+	/** The openthreads. */
 	int openthreads;
 	
+	/**
+	 * Instantiates a new my model.
+	 */
 	public MyModel() {
 		super();
 		this._mazes = new HashMap<String,SearchableMaze>();
@@ -34,6 +50,9 @@ public class MyModel implements Model {
 		openthreads=0;
 	}
 
+	/* (non-Javadoc)
+	 * @see model.Model#generate(java.lang.String, int, int, int)
+	 */
 	@Override
 	public void generate(String name, int x, int y, int z) 
 	{
@@ -48,10 +67,18 @@ public class MyModel implements Model {
 			  }).start();		
 	}
 
+	/**
+	 * Sets the controller.
+	 *
+	 * @param controller the new controller
+	 */
 	public void setController(Controller controller) {
 		this.controller = controller;
 	}
 
+	/* (non-Javadoc)
+	 * @see model.Model#display(java.lang.String)
+	 */
 	@Override
 	public Object[] display(String name) {
 		Object[] arg = {_mazes.get(name)._newMaze.getXLength(),
@@ -63,6 +90,9 @@ public class MyModel implements Model {
 		return arg;
 	}
 
+	/* (non-Javadoc)
+	 * @see model.Model#getCrossSection(java.lang.String, char, int)
+	 */
 	@Override
 	public Object getCrossSection(String name, char dim, int index) throws ArrayIndexOutOfBoundsException
 	{
@@ -74,6 +104,9 @@ public class MyModel implements Model {
 		   }
 	}
 
+	/* (non-Javadoc)
+	 * @see model.Model#save(java.lang.String, java.lang.String)
+	 */
 	@Override
 	public void save(String name, String path) throws Exception 
 	{
@@ -86,6 +119,9 @@ public class MyModel implements Model {
 		controller.PleaseTellView("Maze saved successfully");
 	}
 
+	/* (non-Javadoc)
+	 * @see model.Model#load(java.lang.String, java.lang.String)
+	 */
 	@Override
 	public void load(String name, String path) throws Exception {
 		InputStream in;
@@ -109,18 +145,27 @@ public class MyModel implements Model {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see model.Model#mazeSize(java.lang.String)
+	 */
 	@Override
 	public int mazeSize(String name) 
 	{
 		return _mazes.get(name)._newMaze.size();
 	}
 
+	/* (non-Javadoc)
+	 * @see model.Model#fileSize(java.lang.String)
+	 */
 	@Override
 	public int fileSize(String name) {
 		File f = new File(name);
 		return (int) f.length();
 	}
 
+	/* (non-Javadoc)
+	 * @see model.Model#solve(java.lang.String, java.lang.String)
+	 */
 	@Override
 	public void solve(String name,String alg) {
 		
@@ -152,11 +197,17 @@ public class MyModel implements Model {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see model.Model#displaySolution(java.lang.String)
+	 */
 	@Override
 	public Solution<Position> displaySolution(String name) {
 		return _solutions.get(name);
 	}
 
+	/* (non-Javadoc)
+	 * @see model.Model#exit()
+	 */
 	@Override
 	public void exit() {
 		while (openfiles > 0 || openthreads > 0)
