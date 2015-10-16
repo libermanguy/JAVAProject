@@ -127,9 +127,10 @@ public class CLI extends Thread{
 					getInput();
 			      }
 				
+				
+				}
 				if (line.equals("exit")){
 					cmdsHM.get("exit").doCommand(null);
-				}
 				}
 			    }
 			  }).start();
