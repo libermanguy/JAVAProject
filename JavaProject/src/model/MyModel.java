@@ -23,11 +23,15 @@ public class MyModel implements Model {
 	HashMap<String,SearchableMaze> _mazes;
 	HashMap<String,Solution<Position>> _solutions;
 	Controller controller;
+	int openfiles;
+	int openthreads;
 	
 	public MyModel() {
 		super();
 		this._mazes = new HashMap<String,SearchableMaze>();
 		this._solutions = new HashMap<String,Solution<Position>>();
+		openfiles=0;
+		openthreads=0;
 	}
 
 	@Override
@@ -36,8 +40,10 @@ public class MyModel implements Model {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
+				openthreads++;
 				_mazes.put(name,new SearchableMaze(new MyMaze3dGenerator().generate(x, y, z)));
 				controller.PleaseTellView("your glorious " + name + " is ready sire !");
+				openthreads--;
 			    }
 			  }).start();		
 	}
@@ -72,16 +78,19 @@ public class MyModel implements Model {
 	public void save(String name, String path) throws Exception 
 	{
 		OutputStream out=new MyCompressorOutputStream(new FileOutputStream(path));
-			out.write(_mazes.get(name)._newMaze.toByteArray());
-			out.flush();
-			out.close();	
-			controller.PleaseTellView("Maze saved successfully");
+		openfiles++;
+		out.write(_mazes.get(name)._newMaze.toByteArray());
+		out.flush();
+		out.close();	
+		openfiles--;
+		controller.PleaseTellView("Maze saved successfully");
 	}
 
 	@Override
 	public void load(String name, String path) throws Exception {
 		InputStream in;
 			in = new MyDecompressorInputStream(new FileInputStream(path));
+			openfiles++;
 			ArrayList<Integer> buff = new ArrayList<Integer>();
 			int current = in.read();
 			while (current != -1)
@@ -89,6 +98,7 @@ public class MyModel implements Model {
 			 buff.add(current);
 			 current = in.read();
 			}
+			openfiles--;
 			in.close();
 			byte fileData[]=new byte[buff.size()];
 			for ( int i = 0 ; i < buff.size() ; i ++ )
@@ -117,6 +127,7 @@ public class MyModel implements Model {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
+				openthreads++;
 				Searcher<Position> searcher = null;
 				switch (alg) {
 		    case "bfs": 
@@ -130,11 +141,13 @@ public class MyModel implements Model {
 				{
 			_solutions.put(name, searcher.search(_mazes.get(name)));
 			controller.PleaseTellView("sire, i have unraveled your " + name + " punishment !");
+			openthreads--;
 				}
 				catch (Exception e)
 				{
 					controller.PleaseTellView("Failed solving " + name + " punishment, probably not ready yet or doesn`t exist!");
-			    }
+					openthreads--;
+				}
 			  }}).start();		
 
 	}
@@ -146,8 +159,17 @@ public class MyModel implements Model {
 
 	@Override
 	public void exit() {
-		// TODO Auto-generated method stub
-
+		while (openfiles > 0 || openthreads > 0)
+		{
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			controller.PleaseTellView("there are " + openfiles + " open files and " + openthreads + " open threads");
+		}
+		controller.PleaseTellView("Model Closed");
 	}
 
 }

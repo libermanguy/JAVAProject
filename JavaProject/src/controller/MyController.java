@@ -268,8 +268,9 @@ public class exitCommand implements Command
 
 	@Override
 	public void doCommand(String args[]) {
-		// TODO Auto-generated method stub
-		
+		model.exit();
+		view.displayStr("Program will now exit !");
+		System.exit(0);
 	}
 		
 }
